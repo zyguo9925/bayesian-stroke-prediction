@@ -1,7 +1,6 @@
-Work still in progress (by Samuel)
-
 
 # 1. Introduction (Alex)
+
 data link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
 Using a dataset from Kaggle, “Stroke Prediction Dataset”, we aim to make a prediction model that predicts whether a patient will get a stroke or not. This dataset has a 5,110 rows and 12 columns of real patient data. This includes each patient’s demographic information, biological and socioeconomical attributes such as gender, age, whether or not he/she is married, BMI, hypertension, and disease history. We set our outcome variable to be whether a patient will have a stroke or not.
@@ -11,7 +10,7 @@ Project objective: Predict the probability of stroke using a Bayesian Network.
 Motivation: Medical applications require not just prediction, but also interpretability.
 Methodology overview: Structure learning + parameter estimation + inference.
 
-2. Data profile & preprocessing & EDA (Alex & Sam)
+# 2. Data profile & preprocessing & EDA (Alex & Sam)
 
 -
 
@@ -33,63 +32,87 @@ Methodology overview: Structure learning + parameter estimation + inference.
 
 
 
-- EDA
+# 3. EDA
 
-- Categorical Variable
+
+### Categorical Variable
+#### Are strokes more common among people with heart disease or hypertension?
 
 - Yes
-
   
 <img width="213" alt="image" src="https://github.com/user-attachments/assets/9c47ffa7-239b-4f84-a488-bc11b3fa7a73" /> <img width="223" alt="image" src="https://github.com/user-attachments/assets/c74903e1-68f7-4ada-adf6-8869407115bc" />
 
-- No
-  
-<img width="183" alt="image" src="https://github.com/user-attachments/assets/14b41d58-f71d-4f83-ab74-f2d4a0750c72" /> <img width="206" alt="image" src="https://github.com/user-attachments/assets/f8eedc94-3868-498f-9237-867dec11c5c1" /> <img width="212" alt="image" src="https://github.com/user-attachments/assets/2b6d817b-5d75-4f05-8eac-baedd5f96df3" /> 
+#### Is the risk of stroke related to gender, marriage status, or residence type?
 
+- No
+
+<img width="183" alt="image" src="https://github.com/user-attachments/assets/14b41d58-f71d-4f83-ab74-f2d4a0750c72" /> <img width="206" alt="image" src="https://github.com/user-attachments/assets/f8eedc94-3868-498f-9237-867dec11c5c1" /> <img width="212" alt="image" src="https://github.com/user-attachments/assets/2b6d817b-5d75-4f05-8eac-baedd5f96df3" /> 
  
--Continuous Variable 
--Yes
+### Continuous Variable
+
+#### Is age related to the risk of stroke?
+
+##### Yes
 <img width="345" alt="image" src="https://github.com/user-attachments/assets/5c9e1eeb-34fa-410d-825a-77d2d8f99101" /> 
 
+#### Is BMI related to the risk of stroke?
 
--No
+##### Not much
 <img width="331" alt="image" src="https://github.com/user-attachments/assets/2edf0002-2862-4a87-8fe6-f5ba7ed62a8b" />
 
-
--depends on the interval
+#### How is glucose level related to the risk of stroke?
+##### It depends on the interval
 <img width="349" alt="image" src="https://github.com/user-attachments/assets/bda9ec1c-55a8-4bb7-b554-61531c0354c0" />
 
 
+# 4. Data preprocessing: (Sam)
+
+### 1. Bin the continuous variables
+To feed this data into the Bayesian Network, continuous variables must be converted into categorical format. We identified age, BMI, and average glucose level are continuous variables. Therefore, we bin these variables into categorical variables by grouping them into categorical intervals.
+
+### 2. Bin the categorical variables with low frequencies
+For analytical convenience, we handle fragmented values with very low frequency by either removing them or merging them with the nearest appropriate category. For example, gender has a three values like male, female, and the other, with only one frequency. Also, we simplified job categories with several values into employed or not.
+
+
+### 3. Binary into catgorical variable
+For ease of interpretation, we transform binary values into "Yes" and "No" categories. This makes the Bayesian net easier to read and understand.
+
+
+# 5. Methodology
+
+## 5.1 BayesNet Analysis (Sam)
+
+## Methodology
+- HillClimb
+- Tree Search
+
+## Images
+### HillClimb
+
+<img width="997" alt="image" src="https://github.com/user-attachments/assets/8edf6598-28e1-47d5-acba-5c1b55f0f4c6" />
+
+
+### Tree Search
+<img width="1201" alt="image" src="https://github.com/user-attachments/assets/fd727535-15c0-4b06-8fea-2e5308e55b40" />
+
+
+### Compare BIC score
+
+Hill Climb BIC: -5984.04
+Tree Search BIC: -6708.90
+
+
+### Conclusion from Bayes Net Analysis 
+
+Tree Search is the best model.
+
+
+### Inference
+- Plan to execute the inference analysis from the BayesNet.
 
 
 
 
-
-
-
-
-
-- Data preprocessing: (Sam)
-
-
-1) Bin the “continuous variable”: age, avg_glucose_level, bmi.
-2) Bin the “categorical variables” with low frequency to simplify. e.g.) gender (Other), or simplify jobs (work or not), 
-3) Remove null: bmi has some null values
-
-
-
-
-
-
-
-
-
-3. Methodology
-3.1 Bayes Net Analysis - Samuel
-HillClimb
-Tree Search
-Compare BIC score
-Conclusion from Bayes Net Analysis 
 
 3.2 Baseline Prediction Model
 BayesNet
