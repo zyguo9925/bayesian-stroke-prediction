@@ -1,3 +1,6 @@
+Work still in progress (by Samuel)
+
+
 # 1. Introduction (Alex)
 data link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
