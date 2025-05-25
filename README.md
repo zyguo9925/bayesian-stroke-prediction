@@ -3,12 +3,13 @@
 
 data link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
+Stroke remains one of the leading causes of death and long‑term disability worldwide. Early identification of high‑risk individuals is critical for implementing timely interventions, reducing healthcare costs, and improving patient outcomes. Traditional risk‑scoring systems often rely on a limited set of covariates and yield “black‑box” predictions, which can be difficult for clinicians to interpret and trust. To address these challenges, we leverage a rich, real‑world dataset and a probabilistic modeling framework that balances predictive power with transparency.
+
+The Stroke Prediction Dataset compiles anonymized patient information spanning demographics (age, gender, marital status, residence), clinical measurements (BMI, average glucose level), lifestyle factors (smoking status, work type), and comorbidities (hypertension, heart disease). The binary target indicates whether a patient has experienced a stroke. This diversity of features offers a comprehensive view of the biological, socioeconomic, and behavioral drivers that contribute to cerebrovascular risk.
+
+Our objective is to build a Bayesian Network that estimates the probability of stroke for individual patients, while simultaneously revealing the conditional dependencies among risk factors. By combining structure learning (to uncover the network of relationships) with parameter estimation (to quantify those relationships), we create an interpretable model suited for clinical decision support. During inference, clinicians can query the network to assess how changes in modifiable factors—such as smoking cessation or weight management—alter a patient’s stroke risk, thereby guiding personalized prevention strategies.
+
 Using a dataset from Kaggle, “Stroke Prediction Dataset”, we aim to make a prediction model that predicts whether a patient will get a stroke or not. This dataset has a 5,110 rows and 12 columns of real patient data. This includes each patient’s demographic information, biological and socioeconomical attributes such as gender, age, whether or not he/she is married, BMI, hypertension, and disease history. We set our outcome variable to be whether a patient will have a stroke or not.
-
-
-Project objective: Predict the probability of stroke using a Bayesian Network.
-Motivation: Medical applications require not just prediction, but also interpretability.
-Methodology overview: Structure learning + parameter estimation + inference.
 
 # 2. Data profile & preprocessing & EDA (Alex & Sam)
 
@@ -196,7 +197,20 @@ Conclusion:which features contribute to stroking the most from XGboost importanc
 
 4. Conclusion & Future Work (Alex)
 Combine result from 3.1&3.2 together
-Give a real-world wording conclusion (e.g what kind of advice can give to the public from public health viewpoints)
+
+Our Bayesian Network model demonstrates that both non‑modifiable factors (age, gender, genetic predispositions reflected in comorbidities) and modifiable behaviors (smoking status, BMI, average glucose level, physical activity proxies) jointly shape an individual’s stroke risk. From a public health perspective, these insights translate into actionable guidance:
+
+Hypertension and Diabetes Management: Regular blood pressure and blood sugar monitoring—coupled with adherence to prescribed medications—can substantially lower stroke probability. Community health programs should continue expanding free screening services and patient education on medication compliance.
+
+Weight Control and Nutrition: Elevated BMI and glucose levels emerged as key intermediate risk factors. Public campaigns that promote balanced diets rich in fruits, vegetables, and whole grains, alongside accessible weight‑management resources (e.g., subsidized fitness memberships or nutritional counseling), can help shift population‑level risk profiles.
+
+Potential Future Work will focus on:
+
+Temporal Validation and Dynamic Modeling: Incorporating longitudinal patient records to capture how risk trajectories evolve over time, enhancing the network’s ability to forecast stroke onset months or years in advance.
+
+Integration of Additional Biomarkers: Adding variables such as lipid profiles, genetic markers (e.g., APOE genotype), and measures of inflammation to refine conditional dependencies and improve predictive accuracy.
+
+By translating probabilistic insights into clear, evidence‑based recommendations and by continuously refining our model with richer data, we aim to empower both healthcare providers and the public to make informed decisions that reduce the global burden of stroke.
 
 
 
