@@ -195,16 +195,19 @@ XGboost(winner from comparison) - Importance Score
 Conclusion:which features contribute to stroking the most from XGboost importance scores
 
 
-4. Conclusion & Future Work (Alex)
+# 4. Conclusion & Future Work (Alex)
+
+## Summary of Results: 
 Combine result from 3.1&3.2 together
 
+## Real World Use-Cases:
 Our Bayesian Network model demonstrates that both non‑modifiable factors (age, gender, genetic predispositions reflected in comorbidities) and modifiable behaviors (smoking status, BMI, average glucose level, physical activity proxies) jointly shape an individual’s stroke risk. From a public health perspective, these insights translate into actionable guidance:
 
 Hypertension and Diabetes Management: Regular blood pressure and blood sugar monitoring—coupled with adherence to prescribed medications—can substantially lower stroke probability. Community health programs should continue expanding free screening services and patient education on medication compliance.
 
 Weight Control and Nutrition: Elevated BMI and glucose levels emerged as key intermediate risk factors. Public campaigns that promote balanced diets rich in fruits, vegetables, and whole grains, alongside accessible weight‑management resources (e.g., subsidized fitness memberships or nutritional counseling), can help shift population‑level risk profiles.
 
-Potential Future Work will focus on:
+## Potential Future Work:
 
 Temporal Validation and Dynamic Modeling: Incorporating longitudinal patient records to capture how risk trajectories evolve over time, enhancing the network’s ability to forecast stroke onset months or years in advance.
 
