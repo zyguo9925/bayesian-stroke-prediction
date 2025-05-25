@@ -12,9 +12,20 @@ Methodology overview: Structure learning + parameter estimation + inference.
 
 # 2. Data profile & preprocessing & EDA (Alex & Sam)
 
--
-
 - Data Profile: (Alex)
+
+Dataset Overview
+
+- Rows: 5,110
+
+- Columns: 12
+
+Description: Each record represents a patient’s demographic, lifestyle, and clinical information, with a binary target stroke indicating whether they’ve had a stroke or not.
+
+3. Missing Values
+bmi: 201 missing (3.94% of rows)
+
+All other columns are complete.
 
 ## Attribute Information
 #### 1) id: unique identifier
@@ -30,7 +41,63 @@ Methodology overview: Structure learning + parameter estimation + inference.
 #### 11) smoking_status: "formerly smoked", "never smoked", "smokes" or "Unknown"*
 #### 12) stroke: 1 if the patient had a stroke or 0 if not
 
+Categorical Distributions
+gender (n=5,110)
 
+Female: 2,994 (58.6%)
+
+Male: 2,115 (41.4%)
+
+Other: 1 ( <0.1%)
+
+ever_married
+
+Yes: 3,353 (65.6%)
+
+No: 1,757 (34.4%)
+
+work_type
+
+Private: 2,925 (57.2%)
+
+Self-employed: 819 (16.0%)
+
+children: 687 (13.4%)
+
+Govt_job: 657 (12.9%)
+
+Never_worked: 22 (0.4%)
+
+Residence_type
+
+Urban: 2,596 (50.8%)
+
+Rural: 2,514 (49.2%)
+
+smoking_status
+
+never smoked: 1,892 (37.0%)
+
+Unknown: 1,544 (30.2%)
+
+formerly smoked: 885 (17.3%)
+
+smokes: 789 (15.4%)
+
+Key Observations & Next Steps
+Imbalance: Only ~5% positive cases—may need SMOTE, class weights, or focal loss.
+
+Missing BMI: Impute (e.g., with median by age/gender) or treat “Unknown” category.
+
+Outliers: Extremely high avg_glucose_level and bmi values warrant further inspection.
+
+ID Column: Drop before modeling.
+
+Feature Engineering:
+
+Binning age into categories (child, adult, senior).
+
+Combining smoking_status = Unknown with a “missing” indicator.
 
 # 3. EDA
 
