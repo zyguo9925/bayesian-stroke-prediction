@@ -156,15 +156,22 @@ For ease of interpretation, we transform binary values into "Yes" and "No" categ
 - Tree Search
 
 ## BayesNet
+
+The Bayesian Network analysis reveals the dependency structure among various variables related to stroke prediction. We implemented two models to learn this structure: one using **Hill Climb Search** and the other using **Tree Search**. Each method has its own strengths.
+
 ### HillClimb
 
 <img width="997" alt="image" src="https://github.com/user-attachments/assets/8edf6598-28e1-47d5-acba-5c1b55f0f4c6" />
+
+This Bayesian Network, learning using the Hill Climb algorithm, shows that the age_group is the central node. It is connected to many other variables, and knowing whether an individual has hypertension helps infer their age group. Focusing on strike risk, the model shows that younger individuals have about a 1% chance of stroke, middle-aged individuals 6%, and older individuals 14%. In short, the older the individual, the higher the risk of stroke.
 
 
 ### Tree Search
 <img width="1201" alt="image" src="https://github.com/user-attachments/assets/fd727535-15c0-4b06-8fea-2e5308e55b40" />
 
-The Bayesian Network analysis reveals the dependency structure among various variables related to stroke prediction. We implemented two models to learn this structure: one using **Hill Climb Search** and the other using **Tree Search**. Each method has its own strengths.
+
+
+
 
 Both models identified age as the most influential factor in predicting stroke. This aligns with our EDA findings, which showed that older individuals have a higher risk of stroke compared to younger ones.
 
