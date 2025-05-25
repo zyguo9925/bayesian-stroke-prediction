@@ -12,9 +12,9 @@ Methodology overview: Structure learning + parameter estimation + inference.
 
 # 2. Data profile & preprocessing & EDA (Alex & Sam)
 
-- Data Profile: (Alex)
+## Data Profile: (Alex)
 
-Dataset Overview
+## Dataset Overview:
 
 - Rows: 5,110
 
@@ -22,7 +22,7 @@ Dataset Overview
 
 Description: Each record represents a patient’s demographic, lifestyle, and clinical information, with a binary target stroke indicating whether they’ve had a stroke or not.
 
-3. Missing Values
+## Missing Values
 bmi: 201 missing (3.94% of rows)
 
 All other columns are complete.
@@ -41,7 +41,7 @@ All other columns are complete.
 #### 11) smoking_status: "formerly smoked", "never smoked", "smokes" or "Unknown"*
 #### 12) stroke: 1 if the patient had a stroke or 0 if not
 
-Categorical Distributions
+## Categorical Distributions
 gender (n=5,110)
 
 Female: 2,994 (58.6%)
@@ -84,7 +84,7 @@ formerly smoked: 885 (17.3%)
 
 smokes: 789 (15.4%)
 
-Key Observations & Next Steps
+## Key Observations 
 Imbalance: Only ~5% positive cases—may need SMOTE, class weights, or focal loss.
 
 Missing BMI: Impute (e.g., with median by age/gender) or treat “Unknown” category.
