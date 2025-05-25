@@ -102,17 +102,18 @@ Combining smoking_status = Unknown with a “missing” indicator.
 
 # 3. EDA
 
+In EDA, we explored the potential relationships between each variable and the risk of stroke. We checked the conditional probability of stroke given each variable’s status, and drew a KDE plot for the continuous variables. Key findings include that categorical variables like having hypertension and heart disease appear to be strongly related to the risk of stroke, and continuous variables like age show different distributions depending on whether a person has had a stroke or not. Based on these findings, we applied them to our data preprocessing and formulated hypotheses about which factors most significantly affect the likelihood of stroke.
 
 ### Categorical Variable
 #### Are strokes more common among people with heart disease or hypertension?
 
-- Yes
+##### Yes
   
 <img width="213" alt="image" src="https://github.com/user-attachments/assets/9c47ffa7-239b-4f84-a488-bc11b3fa7a73" /> <img width="223" alt="image" src="https://github.com/user-attachments/assets/c74903e1-68f7-4ada-adf6-8869407115bc" />
 
 #### Is the risk of stroke related to gender, marriage status, or residence type?
 
-- No
+##### No
 
 <img width="183" alt="image" src="https://github.com/user-attachments/assets/14b41d58-f71d-4f83-ab74-f2d4a0750c72" /> <img width="206" alt="image" src="https://github.com/user-attachments/assets/f8eedc94-3868-498f-9237-867dec11c5c1" /> <img width="212" alt="image" src="https://github.com/user-attachments/assets/2b6d817b-5d75-4f05-8eac-baedd5f96df3" /> 
  
@@ -120,16 +121,16 @@ Combining smoking_status = Unknown with a “missing” indicator.
 
 #### Is age related to the risk of stroke?
 
-##### Yes
+##### Age appears to be strongly related to the risk of stroke.
 <img width="345" alt="image" src="https://github.com/user-attachments/assets/5c9e1eeb-34fa-410d-825a-77d2d8f99101" /> 
 
 #### Is BMI related to the risk of stroke?
 
-##### Not much
+##### BMI doesn't seem to be strongly related to the risk of stroke.
 <img width="331" alt="image" src="https://github.com/user-attachments/assets/2edf0002-2862-4a87-8fe6-f5ba7ed62a8b" />
 
 #### How is glucose level related to the risk of stroke?
-##### It depends on the interval
+##### The average glucose level seems to affect the risk of stroke depending on its interval.
 <img width="349" alt="image" src="https://github.com/user-attachments/assets/bda9ec1c-55a8-4bb7-b554-61531c0354c0" />
 
 
@@ -154,7 +155,7 @@ For ease of interpretation, we transform binary values into "Yes" and "No" categ
 - HillClimb
 - Tree Search
 
-## Images
+## BayesNet
 ### HillClimb
 
 <img width="997" alt="image" src="https://github.com/user-attachments/assets/8edf6598-28e1-47d5-acba-5c1b55f0f4c6" />
@@ -186,8 +187,7 @@ Tree Search is the best model.
 
 
 
-
-
+## 5.2  Baseline Analysis & Advanced Prediction (Rebecca)
 3.2 Baseline Prediction Model
 BayesNet
 Logistic Regression (Baseline)
@@ -201,7 +201,7 @@ XGboost(winner from comparison) - Importance Score
 Conclusion:which features contribute to stroking the most from XGboost importance scores
 
 
-# 4. Conclusion & Future Work (Alex)
+# 5. Conclusion & Future Work (Alex)
 
 ## Summary of Results: 
 Combine result from 3.1&3.2 together
