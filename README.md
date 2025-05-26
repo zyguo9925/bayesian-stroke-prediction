@@ -245,7 +245,8 @@ We implemented a **Categorical Naive Bayes** classifier to establish a lightweig
 - We also computed `MSE` (Mean Squared Error) and `RMSE` (Root Mean Squared Error) to provide a unified metric comparison across different models.
 
 
-<img width="578" alt="Naive Bayes" src="https://github.com/user-attachments/assets/01524e29-1772-4ad5-b45f-aea969b6bc9b" />
+<img width="577" alt="Naive Bayes V3" src="https://github.com/user-attachments/assets/1fefad43-e6e8-4ae3-8b7e-98d57325f2a2" />
+
 
 
 ### Random Forest
@@ -267,7 +268,8 @@ We also computed **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMS
 #### Result
 See below for the classification report and confusion matrix.
 
-<img width="599" alt="Random Forest" src="https://github.com/user-attachments/assets/f8822a49-1caa-497b-9c47-cdde3f154b05" />
+<img width="546" alt="RF V3" src="https://github.com/user-attachments/assets/d1895c45-7803-4141-a9dc-046fa5cf9cda" />
+
 
 ### XGBoost
 
@@ -289,7 +291,8 @@ We also computed **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMS
 See below for the classification report and confusion matrix.
 
 
-<img width="565" alt="XGBoost" src="https://github.com/user-attachments/assets/6dd7d1d9-571d-4de0-8bd1-052e5fbd8937" />
+<img width="546" alt="XGB V3" src="https://github.com/user-attachments/assets/5d224409-fac2-423e-8c6b-acd9d6dfbc1c" />
+
 
 
 ### Logistic Regression
@@ -311,7 +314,8 @@ We calculated **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMSE)*
 #### Result  
 See below for the classification report and confusion matrix.  
 
-<img width="617" alt="Logistic" src="https://github.com/user-attachments/assets/37706060-bb1c-4d42-b6fc-a78648d45abb" />
+<img width="592" alt="logit V3" src="https://github.com/user-attachments/assets/92c50293-7bf1-4187-8dcf-c0e1ff39f7a3" />
+
 
 
 ### Bayesian Linear Regression (PyMC)
@@ -352,7 +356,8 @@ We visualized the uncertainty around predictions using:
 The Bayesian Linear Regression model allowed us to estimate not only point predictions but also the uncertainty around them, offering more interpretable insights compared to frequentist regression models.
 
 
-<img width="613" alt="Bayesian" src="https://github.com/user-attachments/assets/0c03678f-f9e1-4775-bd9e-5b27dd8c038c" />
+<img width="553" alt="Bayesian RegressionV3" src="https://github.com/user-attachments/assets/af8177c2-8146-48f4-b093-6a9f952ad5ca" />
+
 
 
 ### Model Comparison and Selection
@@ -371,13 +376,13 @@ We used the **F1-score (Macro Average)** as the key evaluation metric, which bal
 
 | Model                          | F1-score (Macro Avg) |
 |-------------------------------|----------------------|
-| Naive Bayes                   | 0.72                 |
-| Random Forest                 | 0.90                 |
-| **XGBoost**                   | **0.94**             |
-| Logistic Regression           | 0.86                 |
+| Naive Bayes                   | 0.76                 |
+| Random Forest                 | 0.95                 |
+| **XGBoost**                   | **0.95**             |
+| Logistic Regression           | 0.67                 |
 | Bayesian Logistic Regression (PyMC) | 0.68          |
 
-Based on the comparison above, **XGBoost** achieved the highest macro-averaged F1-score of **0.94**, making it the best-performing model for our task.
+Based on the comparison above, **XGBoost** achieved the highest macro-averaged F1-score of **0.95**, making it the best-performing model for our task.
 
 
 ---
@@ -392,7 +397,8 @@ We used the `get_score()` function from the trained XGBoost model to extract imp
 
 The importance scores reveal which features were most frequently used to split data across all boosted trees in the model. Higher scores indicate stronger influence on stroke prediction.
 
-![Importance score](https://github.com/user-attachments/assets/3a30e3a6-8de3-45b6-b452-8000451285bc)
+![Top10](https://github.com/user-attachments/assets/eb26df90-63a7-4467-8ace-c78b71f1b195)
+
 
 
 
