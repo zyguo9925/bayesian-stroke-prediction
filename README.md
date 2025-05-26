@@ -392,7 +392,8 @@ We used the `get_score()` function from the trained XGBoost model to extract imp
 
 The importance scores reveal which features were most frequently used to split data across all boosted trees in the model. Higher scores indicate stronger influence on stroke prediction.
 
-![XGboost importance score](https://github.com/user-attachments/assets/0f700baf-7897-4540-8de5-a839a7fb421d)
+![Importance score](https://github.com/user-attachments/assets/3a30e3a6-8de3-45b6-b452-8000451285bc)
+
 
 
 These top features offer insight into the key risk indicators of stroke based on our dataset and model training.
