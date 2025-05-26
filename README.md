@@ -203,17 +203,224 @@ Query inferencing of getting a stroke
 
 
 ## 5.2  Baseline Analysis & Advanced Prediction (Rebecca)
-3.2 Baseline Prediction Model
-BayesNet
-Logistic Regression (Baseline)
-Bayesian linear Regression
-+ MCMC (Bayesian linear regression -> Estimate using PyMC Sampling)
-Naive Bayes Classifier
-XGBoost
-Random forest
-Comparison across the models and pick the best model.
-XGboost(winner from comparison) - Importance Score
-Conclusion:which features contribute to stroking the most from XGboost importance scores
+###  Preprocess Data
+
+To prepare the data for modeling, we applied the following preprocessing steps:
+
+#### 1. Separate Features and Target
+- The target variable `stroke` was separated from the feature set.
+
+#### 2. Ordinal Encoding for Categorical Variables
+- We used `OrdinalEncoder` to convert all categorical variables into numerical format.
+- Unknown categories during transformation were handled with a dedicated encoding (`unknown_value=-1`).
+
+#### 3. Handle Missing Values
+- Any missing values were filled using the most frequent value (`mode`) for each column.
+
+#### 4. SMOTE Oversampling
+- To address class imbalance in the `stroke` label, we applied **SMOTE** (Synthetic Minority Over-sampling Technique).
+- SMOTE synthetically generates new samples from the minority class to balance the dataset.
+
+#### 5. Train/Test Split
+- The resampled dataset was split into training and testing sets using an 80/20 ratio.
+- The split was stratified based on the `stroke` label to preserve class distribution.
+
+
+###  Naive Bayes Classifier
+
+We implemented a **Categorical Naive Bayes** classifier to establish a lightweight probabilistic baseline.
+
+#### 1. Model Training
+- Trained using `CategoricalNB()` from `sklearn.naive_bayes`.
+- The model was fit on the training set (`X_train`, `y_train`) and used to predict the labels for the test set (`X_test`).
+
+#### 2. Label Conversion
+- For evaluation purposes, both true and predicted labels were mapped from `{'No': 0, 'Yes': 1}`.
+
+#### 3. Evaluation Metrics
+- A **classification report** was generated to provide precision, recall, f1-score, and support for each class.
+- A **confusion matrix** was plotted using a heatmap (`seaborn`) to visualize prediction performance.
+
+#### 4. Regression Metrics (for consistency)
+- We also computed `MSE` (Mean Squared Error) and `RMSE` (Root Mean Squared Error) to provide a unified metric comparison across different models.
+
+
+<img width="578" alt="Naive Bayes" src="https://github.com/user-attachments/assets/01524e29-1772-4ad5-b45f-aea969b6bc9b" />
+
+
+### Random Forest
+
+We implemented a **Random Forest** classifier to predict stroke occurrence and evaluate its performance.
+
+#### Model Training
+We trained a `RandomForestClassifier` from `sklearn.ensemble` using the training data. A fixed `random_state=42` was used to ensure reproducibility.
+
+#### Prediction & Evaluation
+Predictions were made on the test set. We generated a classification report including **precision**, **recall**, and **F1-score** for both stroke and no-stroke cases.
+
+#### Confusion Matrix
+We visualized the confusion matrix using a heatmap (`seaborn.heatmap`) to better understand the model’s prediction patterns.
+
+#### MSE & RMSE
+We also computed **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMSE)** as numerical performance metrics. Labels were converted from `"Yes"`/`"No"` to `1`/`0` respectively for calculation.
+
+#### Result
+See below for the classification report and confusion matrix.
+
+<img width="599" alt="Random Forest" src="https://github.com/user-attachments/assets/f8822a49-1caa-497b-9c47-cdde3f154b05" />
+
+### XGBoost
+
+We implemented an **XGBoost** classifier to predict stroke occurrence and evaluate its performance.
+
+#### Model Training
+We trained an `XGBClassifier` from `xgboost` using the training data. We disabled the default label encoder with `use_label_encoder=False`, used `'logloss'` as the evaluation metric, and set a fixed `random_state=42` for reproducibility.
+
+#### Prediction & Evaluation
+Predictions were made on the test set. We generated a classification report including **precision**, **recall**, and **F1-score** for both stroke and no-stroke cases.
+
+#### Confusion Matrix
+We visualized the confusion matrix using a heatmap (`seaborn.heatmap`) to better understand the model’s prediction patterns.
+
+#### MSE & RMSE
+We also computed **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMSE)** as numerical performance metrics. Labels were converted from `"Yes"`/`"No"` to `1`/`0` respectively.
+
+#### Result
+See below for the classification report and confusion matrix.
+
+
+<img width="565" alt="XGBoost" src="https://github.com/user-attachments/assets/6dd7d1d9-571d-4de0-8bd1-052e5fbd8937" />
+
+
+### Logistic Regression
+
+We implemented a **Logistic Regression** model to predict the likelihood of stroke occurrence and evaluate its performance.
+
+#### Model Training  
+We used the `LogisticRegression` class from `sklearn.linear_model` to train the model on the prepared dataset. A fixed `random_state=42` and `max_iter=1000` were used to ensure convergence and reproducibility.
+
+#### Prediction & Evaluation  
+Predictions were generated on the test dataset. A classification report was generated, including **precision**, **recall**, and **F1-score** to assess model performance for both stroke and non-stroke cases.
+
+#### Confusion Matrix  
+We visualized the confusion matrix using a heatmap (`seaborn.heatmap`) to observe how well the model distinguishes between the classes.
+
+#### MSE & RMSE  
+We calculated **Mean Squared Error (MSE)** and **Root Mean Squared Error (RMSE)** to numerically evaluate prediction performance.
+
+#### Result  
+See below for the classification report and confusion matrix.  
+
+<img width="617" alt="Logistic" src="https://github.com/user-attachments/assets/37706060-bb1c-4d42-b6fc-a78648d45abb" />
+
+
+### Bayesian Linear Regression (PyMC)
+
+We implemented a **Bayesian Linear Regression** model using the `PyMC` probabilistic programming library. This approach allows us to model uncertainty in the predictions by estimating the posterior distributions of the regression coefficients.
+
+#### Model Setup
+
+We used `pm.Model()` from the `pymc` library to define the probabilistic structure:
+- **Priors** were assigned to the regression coefficients and intercept (Normal distributions).
+- **Likelihood** was defined using a Normal distribution for the observed target variable, conditional on the linear predictor.
+
+#### Inference with MCMC
+
+To estimate the posterior distributions of the parameters, we used **Markov Chain Monte Carlo (MCMC)** sampling via `pm.sample()`:
+- We drew 1,000 posterior samples with a 1,000-sample tuning phase.
+- The `nuts` sampler was automatically selected by PyMC.
+
+#### Posterior Analysis
+
+We analyzed the posterior distributions using:
+- `arviz.plot_trace()` to visualize trace plots and convergence of the chains.
+- `arviz.summary()` to examine mean estimates and credible intervals of each parameter.
+
+#### Prediction
+
+Posterior predictive sampling was performed using `pm.sample_posterior_predictive()` to generate predicted values and quantify uncertainty in predictions.
+
+#### Visualization
+
+We visualized the uncertainty around predictions using:
+- **Posterior predictive plots** with confidence intervals
+- **Trace plots** to check sampler behavior
+- **Summary statistics** of the posterior to interpret coefficient effects
+
+#### Result
+
+The Bayesian Linear Regression model allowed us to estimate not only point predictions but also the uncertainty around them, offering more interpretable insights compared to frequentist regression models.
+
+
+<img width="613" alt="Bayesian" src="https://github.com/user-attachments/assets/0c03678f-f9e1-4775-bd9e-5b27dd8c038c" />
+
+
+### Model Comparison and Selection
+
+To evaluate the performance of different models in predicting stroke occurrence, we compared five baseline classifiers:
+
+- **Naive Bayes**
+- **Random Forest**
+- **XGBoost**
+- **Logistic Regression**
+- **Bayesian Logistic Regression (PyMC)**
+
+We used the **F1-score (Macro Average)** as the key evaluation metric, which balances precision and recall across both classes (stroke / no stroke).
+
+#### F1-Score Comparison
+
+| Model                          | F1-score (Macro Avg) |
+|-------------------------------|----------------------|
+| Naive Bayes                   | 0.72                 |
+| Random Forest                 | 0.90                 |
+| **XGBoost**                   | **0.94**             |
+| Logistic Regression           | 0.86                 |
+| Bayesian Logistic Regression (PyMC) | 0.68          |
+
+Based on the comparison above, **XGBoost** achieved the highest macro-averaged F1-score of **0.94**, making it the best-performing model for our task.
+
+---
+
+### Model Comparison and Selection
+
+To evaluate the performance of different models in predicting stroke occurrence, we compared five baseline classifiers:
+
+- **Naive Bayes**
+- **Random Forest**
+- **XGBoost**
+- **Logistic Regression**
+- **Bayesian Logistic Regression (PyMC)**
+
+We used the **F1-score (Macro Average)** as the key evaluation metric, which balances precision and recall across both classes (stroke / no stroke).
+
+#### F1-Score Comparison
+
+| Model                          | F1-score (Macro Avg) |
+|-------------------------------|----------------------|
+| Naive Bayes                   | 0.72                 |
+| Random Forest                 | 0.90                 |
+| **XGBoost**                   | **0.94**             |
+| Logistic Regression           | 0.86                 |
+| Bayesian Logistic Regression (PyMC) | 0.68          |
+
+Based on the comparison above, **XGBoost** achieved the highest macro-averaged F1-score of **0.94**, making it the best-performing model for our task.
+
+---
+
+### Feature Importance with XGBoost
+
+After identifying **XGBoost** as the best-performing model, we used its built-in feature importance method to interpret the factors contributing most significantly to stroke prediction.
+
+We used the `get_score()` function from the trained XGBoost model to extract importance scores based on the **F Score (weight)**, and visualized the top 10 features with the highest impact.
+
+#### Visualization
+
+The importance scores reveal which features were most frequently used to split data across all boosted trees in the model. Higher scores indicate stronger influence on stroke prediction.
+
+![XGboost importance score](https://github.com/user-attachments/assets/0f700baf-7897-4540-8de5-a839a7fb421d)
+
+
+These top features offer insight into the key risk indicators of stroke based on our dataset and model training.
 
 
 # 6. Conclusion & Future Work (Alex)
