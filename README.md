@@ -210,7 +210,7 @@ XGboost(winner from comparison) - Importance Score
 Conclusion:which features contribute to stroking the most from XGboost importance scores
 
 
-# 5. Conclusion & Future Work (Alex)
+# 6. Conclusion & Future Work (Alex)
 
 ## Summary of Results: 
 Combine result from 3.1&3.2 together
