@@ -379,31 +379,6 @@ We used the **F1-score (Macro Average)** as the key evaluation metric, which bal
 
 Based on the comparison above, **XGBoost** achieved the highest macro-averaged F1-score of **0.94**, making it the best-performing model for our task.
 
----
-
-### Model Comparison and Selection
-
-To evaluate the performance of different models in predicting stroke occurrence, we compared five baseline classifiers:
-
-- **Naive Bayes**
-- **Random Forest**
-- **XGBoost**
-- **Logistic Regression**
-- **Bayesian Logistic Regression (PyMC)**
-
-We used the **F1-score (Macro Average)** as the key evaluation metric, which balances precision and recall across both classes (stroke / no stroke).
-
-#### F1-Score Comparison
-
-| Model                          | F1-score (Macro Avg) |
-|-------------------------------|----------------------|
-| Naive Bayes                   | 0.72                 |
-| Random Forest                 | 0.90                 |
-| **XGBoost**                   | **0.94**             |
-| Logistic Regression           | 0.86                 |
-| Bayesian Logistic Regression (PyMC) | 0.68          |
-
-Based on the comparison above, **XGBoost** achieved the highest macro-averaged F1-score of **0.94**, making it the best-performing model for our task.
 
 ---
 
