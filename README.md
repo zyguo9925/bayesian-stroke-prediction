@@ -192,7 +192,13 @@ Tree Search is the best model.
 
 
 ### Inference
-- Plan to execute the inference analysis from the BayesNet.
+<img width="430" alt="image" src="https://github.com/user-attachments/assets/00bedc76-5db8-4711-b4ef-3ba4b864612a" /> 
+Query inferencing of getting a stroke
+
+<img width="252" alt="image" src="https://github.com/user-attachments/assets/7873e5dc-98c5-4454-9383-8b913fdd583b" /> Distribution of strokes among the Young age group
+
+
+<img width="248" alt="image" src="https://github.com/user-attachments/assets/ed65a5ce-303e-428b-97b8-2f909597579a" /> Distribution of getting stroke of the Old age group
 
 
 
