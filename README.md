@@ -409,15 +409,28 @@ These top features offer insight into the key risk indicators of stroke based on
 
 ## Summary of Results: 
 
-Bayesian network analysis revealed that age group sits at the center of the dependency structure. The tree‑search model, with a BIC of –6708.90, provided a simpler yet well‑fitting hierarchy compared to hill‑climb (BIC –5984.04). In practical terms, inferred stroke probabilities climbed from about 1% for younger patients to roughly 6% in middle age and 14% among the elderly. Secondary connections—such as from hypertension to glucose level, or from smoking status to heart disease—highlight how modifiable risk factors interact with non‑modifiable ones to shape overall risk.
+The Bayesian network experiments and downstream classifiers together paint a coherent picture of stroke risk and modeling trade‑offs:
 
-When we ran inference on the network, clear “what‑if” scenarios emerged. For instance, an elderly patient without hypertension but with elevated glucose still faces a higher stroke probability than a middle‑aged patient with well‑controlled glucose and no heart disease. This quantifies the benefit of interventions like blood‑pressure control or glucose management.
+Bayesian network structure learning
+• The tree‑search model, with a BIC of –6708.90, proved more parsimonious than the hill‑climb graph (BIC –5984.04) while preserving key dependencies.
+• Age group emerged as the nexus of the network, connecting directly to stroke, hypertension, glucose level, and smoking status. This reflects how non‑modifiable factors orient the overall risk landscape.
+• Inferred stroke probabilities climb steadily with age: roughly 1 percent for young adults, 6 percent for middle‑aged individuals, and 14 percent for the elderly. Secondary paths showed that controlling hypertension or lowering glucose can meaningfully shift risk even within each age strata.
 
-Among the baseline classifiers, categorical naive Bayes provided a quick, interpretable benchmark (macro‑F1 ≈ 0.72). Logistic regression improved both performance and interpretability (macro‑F1 ≈ 0.86) by showing how each coefficient shifts log‑odds. Random forest further increased predictive power (macro‑F1 ≈ 0.90), but at the cost of a more opaque ensemble. XGBoost achieved the best balance of accuracy and efficiency (macro‑F1 ≈ 0.94), suggesting that boosted trees can capture complex interactions in the data. Bayesian logistic regression offered full posterior uncertainty quantification, though it lagged in point‑prediction metrics (macro‑F1 ≈ 0.68).
+Classifier performance and interpretation
+• Categorical naive Bayes offered a quick baseline (macro‑F1 ≈ 0.76), underscoring the value of simple probabilistic models when interpretability and speed are priorities.
+• Logistic regression improved calibration and interpretability, with coefficients directly indicating log‑odds shifts, but its macro‑F1 (≈ 0.67) lagged behind more flexible learners.
+• Random forest and XGBoost captured complex, nonlinear interactions—both achieved a macro‑F1 of approximately 0.95. Their near‑identical performance suggests diminishing returns beyond ensemble tree methods for this dataset.
+• Bayesian logistic regression allowed full posterior uncertainty quantification but offered lower point‑prediction accuracy (macro‑F1 ≈ 0.68), reinforcing that richer uncertainty estimates can come at the expense of predictive sharpness.
 
-Feature‑importance analysis from XGBoost underscored that age, average glucose level, hypertension and heart disease account for the largest share of predictive signal. Body‑mass index, marital status and smoking habits also contributed meaningfully, indicating that both biological and lifestyle factors should inform risk assessment.
+Feature importance and actionable insights
+• The most influential predictors across models were age, average glucose level, hypertension, and heart disease, followed by BMI, marital status, and smoking behavior.
+• This hierarchy confirms that efforts to screen and manage blood pressure and glucose—especially in older populations—should remain cornerstones of stroke prevention programs.
+• Lifestyle interventions (smoking cessation, weight control) have measurable impact, but their benefit is modulated by the patient’s age and comorbidity profile.
 
-Taken together, these findings demonstrate the trade‑offs between model interpretability and predictive power. The Bayesian network excels at explaining interdependencies and enabling scenario analysis—essential for clinical decision support—while XGBoost offers superior out‑of‑sample accuracy. Integrating these approaches could allow practitioners to flag high‑risk individuals with confidence and then explore the underlying drivers of their risk profiles.
+Trade‑offs and combined use
+• The Bayesian network excels at revealing how risk factors interconnect and supports “what‑if” queries that quantify the benefit of specific interventions.
+• XGBoost and random forest deliver superior out‑of‑sample accuracy, making them preferable when prediction alone is the objective.
+• A hybrid approach—flagging high‑risk individuals with a tree‑based model, then drilling into risk pathways via the Bayesian network—could offer both reliable risk stratification and actionable explanations for clinicians and public‑health planners.
 
 ## Real World Use-Cases:
 Our Bayesian Network model demonstrates that both non‑modifiable factors (age, gender, genetic predispositions reflected in comorbidities) and modifiable behaviors (smoking status, BMI, average glucose level, physical activity proxies) jointly shape an individual’s stroke risk. From a public health perspective, these insights translate into actionable guidance:
