@@ -179,7 +179,7 @@ Query inferencing of getting a stroke
 
 
 
-## 5.2  Baseline Analysis & Advanced Prediction (Rebecca)
+## 5.2  Baseline Analysis & Advanced Prediction
 ###  Preprocess Data
 
 To prepare the data for modeling, we applied the following preprocessing steps:
@@ -382,7 +382,7 @@ The importance scores reveal which features were most frequently used to split d
 These top features offer insight into the key risk indicators of stroke based on our dataset and model training.
 
 
-# 6. Conclusion & Future Work (Alex)
+# 6. Conclusion & Future Work
 
 ## Summary of Results: 
 
