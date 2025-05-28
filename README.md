@@ -1,5 +1,5 @@
 
-# 1. Introduction (Alex)
+# 1. Introduction
 
 data link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
@@ -11,94 +11,71 @@ Our objective is to build a Bayesian Network that estimates the probability of s
 
 Using a dataset from Kaggle, “Stroke Prediction Dataset”, we aim to make a prediction model that predicts whether a patient will get a stroke or not. This dataset has a 5,110 rows and 12 columns of real patient data. This includes each patient’s demographic information, biological and socioeconomical attributes such as gender, age, whether or not he/she is married, BMI, hypertension, and disease history. We set our outcome variable to be whether a patient will have a stroke or not.
 
-# 2. Data profile & preprocessing & EDA (Alex & Sam)
+# 2. Data profile & preprocessing & EDA 
 
-## Data Profile: (Alex)
+### 2.1 Data Profile
 
-## Dataset Overview:
+#### Dataset Overview
+- **Rows:** 5,110  
+- **Columns:** 12  
+- **Description:** Each record describes a patient’s demographics, lifestyle, clinical measurements, and a binary `stroke` outcome (0 = no stroke, 1 = stroke).
 
-- Rows: 5,110
+#### Missing Values
+- **`bmi`**: 201 missing (3.94% of rows)  
+- All other columns are complete.
 
-- Columns: 12
+#### Attribute Information
 
-Description: Each record represents a patient’s demographic, lifestyle, and clinical information, with a binary target stroke indicating whether they’ve had a stroke or not.
+| Column               | Type        | Description                                                           |
+|----------------------|-------------|-----------------------------------------------------------------------|
+| `id`                 | Integer     | Unique identifier (drop before modeling)                              |
+| `gender`             | Categorical | Male, Female, or Other                                                |
+| `age`                | Numeric     | Age of the patient (years)                                            |
+| `hypertension`       | Binary      | 0 = no hypertension, 1 = has hypertension                             |
+| `heart_disease`      | Binary      | 0 = no heart disease, 1 = has heart disease                           |
+| `ever_married`       | Categorical | Yes or No                                                             |
+| `work_type`          | Categorical | Private, Self‑employed, Govt_job, children, or Never_worked           |
+| `Residence_type`     | Categorical | Urban or Rural                                                        |
+| `avg_glucose_level`  | Numeric     | Average blood glucose level (mg/dL)                                   |
+| `bmi`                | Numeric     | Body mass index (kg/m²)                                               |
+| `smoking_status`     | Categorical | never smoked, formerly smoked, smokes, or Unknown                     |
+| `stroke`             | Binary      | 0 = no stroke, 1 = had a stroke                                       |
 
-## Missing Values
-bmi: 201 missing (3.94% of rows)
+#### Categorical Distributions
+- **gender** (n=5,110)  
+  - Female: 2,994 (58.6%)  
+  - Male:   2,115 (41.4%)  
+  - Other:     1 (< 0.1%)
 
-All other columns are complete.
+- **ever_married**  
+  - Yes: 3,353 (65.6%)  
+  - No:  1,757 (34.4%)
 
-## Attribute Information
-#### 1) id: unique identifier
-#### 2) gender: "Male", "Female" or "Other"
-#### 3) age: age of the patient
-#### 4) hypertension: 0 if the patient doesn't have hypertension, 1 if the patient has hypertension
-#### 5) heart_disease: 0 if the patient doesn't have any heart diseases, 1 if the patient has a heart disease
-#### 6) ever_married: "No" or "Yes"
-#### 7) work_type: "children", "Govt_jov", "Never_worked", "Private" or "Self-employed"
-#### 8) Residence_type: "Rural" or "Urban"
-#### 9) avg_glucose_level: average glucose level in blood
-#### 10) bmi: body mass index
-#### 11) smoking_status: "formerly smoked", "never smoked", "smokes" or "Unknown"*
-#### 12) stroke: 1 if the patient had a stroke or 0 if not
+- **work_type**  
+  - Private:       2,925 (57.2%)  
+  - Self‑employed:   819 (16.0%)  
+  - children:        687 (13.4%)  
+  - Govt_job:        657 (12.9%)  
+  - Never_worked:     22 (0.4%)
 
-## Categorical Distributions
-gender (n=5,110)
+- **Residence_type**  
+  - Urban: 2,596 (50.8%)  
+  - Rural: 2,514 (49.2%)
 
-Female: 2,994 (58.6%)
+- **smoking_status**  
+  - never smoked:    1,892 (37.0%)  
+  - Unknown:         1,544 (30.2%)  
+  - formerly smoked:   885 (17.3%)  
+  - smokes:            789 (15.4%)
 
-Male: 2,115 (41.4%)
-
-Other: 1 ( <0.1%)
-
-ever_married
-
-Yes: 3,353 (65.6%)
-
-No: 1,757 (34.4%)
-
-work_type
-
-Private: 2,925 (57.2%)
-
-Self-employed: 819 (16.0%)
-
-children: 687 (13.4%)
-
-Govt_job: 657 (12.9%)
-
-Never_worked: 22 (0.4%)
-
-Residence_type
-
-Urban: 2,596 (50.8%)
-
-Rural: 2,514 (49.2%)
-
-smoking_status
-
-never smoked: 1,892 (37.0%)
-
-Unknown: 1,544 (30.2%)
-
-formerly smoked: 885 (17.3%)
-
-smokes: 789 (15.4%)
-
-## Key Observations 
-Imbalance: Only ~5% positive cases—may need SMOTE, class weights, or focal loss.
-
-Missing BMI: Impute (e.g., with median by age/gender) or treat “Unknown” category.
-
-Outliers: Extremely high avg_glucose_level and bmi values warrant further inspection.
-
-ID Column: Drop before modeling.
-
-Feature Engineering:
-
-Binning age into categories (child, adult, senior).
-
-Combining smoking_status = Unknown with a “missing” indicator.
+### 2.2 Key Observations
+- **Imbalanced target:** Only ~5% of patients had a stroke. Consider SMOTE, class weights, or focal loss in modeling.  
+- **Missing BMI values:** Impute (e.g., median by age/gender) or treat “Unknown” as its own category.  
+- **Outliers present:** Extremely high `avg_glucose_level` and `bmi` values warrant further review.  
+- **ID column:** Drop before modeling—no predictive value.  
+- **Feature engineering ideas:**  
+  - Bin `age` into categories (e.g., child, adult, senior).  
+  - Create a “missing” indicator for `smoking_status = Unknown`.  
 
 # 3. EDA
 
