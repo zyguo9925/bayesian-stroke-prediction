@@ -111,7 +111,7 @@ In EDA, we explored the potential relationships between each variable and the ri
 <img width="349" alt="image" src="https://github.com/user-attachments/assets/bda9ec1c-55a8-4bb7-b554-61531c0354c0" />
 
 
-# 4. Data preprocessing: (Sam)
+# 4. Data preprocessing:
 
 ### 1. Bin the continuous variables
 To feed this data into the Bayesian Network, continuous variables must be converted into categorical format. We identified age, BMI, and average glucose level are continuous variables. Therefore, we bin these variables into categorical variables by grouping them into categorical intervals.
@@ -126,7 +126,7 @@ For ease of interpretation, we transform binary values into "Yes" and "No" categ
 
 # 5. Methodology
 
-## 5.1 BayesNet Analysis (Sam)
+## 5.1 BayesNet Analysis
 
 ## Methodology
 - HillClimb
